@@ -1,0 +1,88 @@
+.thumbnailImageSavedVideos {
+    width: 350px;
+    height: 190px;
+  }
+  
+  .listStylingSavedVideoItem {
+    list-style-type: none;
+    margin: 10px;
+  }
+  
+  .savedVideoArrangeItems {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+  }
+  
+  .savedVideoContentsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .viewsAndDateSaved {
+    display: flex;
+  }
+  
+  .headingSavedVideoItem {
+    width: 80%;
+  }
+  
+  .viewAndDateSavedDark {
+    color: #6b7f8a;
+  }
+  .arrangeInRowSaveLater {
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  @media (min-width: 576px) and (max-width: 900px) {
+    .thumbnailImageSavedVideos {
+      width: 250px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .savedVideoArrangeItems {
+      display: flex;
+      flex-direction: column;
+      margin: 10px;
+      margin-bottom: 50px;
+      gap: 20px;
+    }
+    .thumbnailImageSavedVideos {
+      width: 99%;
+    }
+    .listStylingSavedVideoItem {
+      margin-left: 0px;
+    }
+    .headingSavedVideoItem {
+      width: 100%;
+    }
+    .arrangeInRowSaveLater {
+      display: flex;
+      flex-direction: row;
+      gap: 25px;
+    }
+    .savedVideoContentsContainer {
+      gap: 1x;
+    }
+    .headingSavedVideoItem {
+      font-size: 16px;
+    }
+    /* .trendingPageDarkThemeHeading {
+      margin-bottom: 10px;
+    }
+    .arrangeRowTrending {
+      flex-direction: row;
+      margin-top: 0px;
+    }
+  
+    .arrangeInRowTrending {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    } */
+  }
+  

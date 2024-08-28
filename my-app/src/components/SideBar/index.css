@@ -1,0 +1,89 @@
+.sideBarMainContainer {
+    width: 25%;
+    padding: 30px;
+    padding-left: 10px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90vh;
+  }
+  
+  .arrangeSideBarContainer {
+    padding: 10px;
+  }
+  
+  .iconSideBar {
+    font-size: 24px;
+  }
+  
+  .activeSideBar {
+    background-color: #e2e8f0;
+  }
+  
+  .darkBackgroundActive {
+    background-color: #383838;
+  }
+  
+  .buttonContainerSideBar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    gap: 25px;
+  }
+  
+  .sideBarContactUs {
+    width: 90%;
+    justify-self: flex-end;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sideBarHeading {
+    margin: 0px;
+  }
+  
+  .sideBarIcons {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .contactUsHeading {
+    color: #181818;
+  }
+  
+  .contactUsPara {
+    font-weight: 600;
+    color: #181818;
+    font-size: 18px;
+  }
+  
+  .iconSideBarStyling {
+    color: red;
+    font-size: 30px;
+  }
+  
+  .sideBarDarkBackground {
+    background-color: #212121;
+  }
+  
+  .darkSideHeadingSideBar {
+    color: white;
+  }
+  
+  .darkThemeWhiteText {
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .sideBarMainContainer {
+      display: none;
+    }
+  }
+  

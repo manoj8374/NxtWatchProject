@@ -1,0 +1,39 @@
+.gamingThumbnailImage {
+    width: 250px;
+  }
+  
+  .gamingListItem {
+    list-style-type: none;
+    margin-bottom: 50px;
+  }
+  
+  .arrangeContentsGaming {
+    display: flex;
+    flex-direction: column;
+    color: #7e8e7c;
+    font-weight: 500;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  
+  .gamingTitle {
+    color: #1d293a;
+    font-weight: 700;
+  }
+  
+  .darkThemeGameTitle {
+    color: white;
+  }
+  
+  @media (max-width: 576px) {
+    .gamingListItem {
+      width: 100%;
+    }
+    .gamingThumbnailImage {
+      width: 100%;
+    }
+    .gamingLinkItem {
+      width: 45%;
+    }
+  }
+  

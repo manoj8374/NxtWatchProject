@@ -1,0 +1,68 @@
+.trendingCardListItem {
+    list-style-type: none;
+    display: flex;
+    gap: 50px;
+    margin-bottom: 50px;
+  }
+  
+  .trendingImageThumbnail {
+    width: 450px;
+  }
+  
+  .arrangeRowTrending {
+    display: flex;
+    color: #7e8e7c;
+    font-weight: 500;
+    font-size: 18px;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .trendingPageLightThemeHeading {
+    color: #1d293a;
+    font-size: 24px;
+  }
+  
+  .lightThemeChannelName {
+    color: #7e8e7c;
+  }
+  
+  .trendingPageDarkThemeHeading {
+    color: white;
+    font-size: 24px;
+  }
+  
+  @media (min-width: 576px) and (max-width: 900px) {
+    .trendingImageThumbnail {
+      width: 250px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .trendingCardListItem {
+      display: flex;
+      flex-direction: column;
+    }
+    .trendingImageThumbnail {
+      width: 100%;
+    }
+    .trendingPageDarkThemeHeading {
+      margin-bottom: 10px;
+    }
+    .arrangeRowTrending {
+      flex-direction: row;
+      margin-top: 0px;
+    }
+  
+    .arrangeInRowTrending {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .trendingCardListItem {
+      margin: 10px;
+      margin-bottom: 50px;
+      gap: 20px;
+    }
+  }
+  

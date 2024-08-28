@@ -1,0 +1,87 @@
+.loginContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .subLoginContainer {
+    padding-top: 40px;
+    padding-bottom: 10px;
+    width: 30%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .loginFormContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    width: 90%;
+  }
+  
+  .labelLogin {
+    margin-bottom: 10px;
+    color: #475569;
+    font-weight: bold;
+  }
+  
+  .inputStylingLogin {
+    padding: 8px;
+    color: #475569;
+    margin-bottom: 20px;
+    outline: none;
+  }
+  
+  .loginButtonStyling {
+    background-color: #3b82f6;
+    border: 0px;
+    padding: 10px;
+    margin-top: 10px;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  .loginPageLogo {
+    width: 250px;
+  }
+  
+  .darkLoginPage {
+    background-color: #212121;
+  }
+  
+  .darkSubContainer {
+    background-color: #0f0f0f;
+  }
+  
+  .darkLabel {
+    color: white;
+  }
+  
+  .loginFormErrorMessage {
+    color: red;
+  }
+  
+  @media (max-width: 1200px) {
+    .subLoginContainer {
+      width: 50%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .subLoginContainer {
+      width: 90%;
+    }
+    .loginPageLogo {
+      width: 120px;
+    }
+  }
+  

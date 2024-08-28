@@ -1,0 +1,40 @@
+.savedVideosContainer {
+    height: 90vh;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-left: 1px;
+    width: 100%;
+  }
+  
+  .savedVideosContainer {
+    width: 100%;
+  }
+  
+  .noVideoSavedImage {
+    width: 500px;
+  }
+  
+  .noSavedVideosContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .noSavedVideoHeadingDark {
+    color: white;
+  }
+  
+  .noSavedVideoHeadingLight {
+    color: #1c2940;
+  }
+  
+  .noSavedVideoPara {
+    color: #6b7982;
+  }
+  
+  .savedVideosUlContainer {
+    padding-left: 0px;
+  }
+  

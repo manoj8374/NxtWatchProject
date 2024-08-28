@@ -1,0 +1,250 @@
+.logoutStyling {
+    background-color: transparent;
+    border: 2px solid #3b82f6;
+    color: #3b82f6;
+    width: 100px;
+    padding: 8px;
+    border-radius: 5px;
+  }
+  
+  .headerLogo {
+    width: 180px;
+    margin-left: 50px;
+  }
+  
+  .profilePicHeader {
+    width: 40px;
+  }
+  
+  .darkThemeHeader {
+    width: 60px;
+  }
+  
+  .headerMainContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    z-index: 2000;
+    top: 0px;
+  
+    background-color: white;
+  }
+  
+  .headerElements {
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    padding-right: 25px;
+    gap: 40px;
+  }
+  
+  .darkBackgroundHeader {
+    background-color: #212121;
+  }
+  
+  .rotateDarkModeImage {
+    margin-top: 15x;
+    transform: rotate(-10deg);
+  }
+  
+  .headerToggleButtonStyling {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .logoutPopUpContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15x;
+    align-items: center;
+  }
+  
+  .popup-content {
+    width: 40%;
+    border-radius: 15px;
+    padding: 25px;
+    padding-bottom: 0px;
+    height: 180px;
+    border: none;
+  }
+  
+  .lightThemeStylingLogoutPopUp {
+    font-size: 20px;
+    color: #3c6290;
+    font-weight: 500;
+  }
+  
+  .buttonContainerLogout {
+    display: flex;
+    gap: 24px;
+  }
+  
+  .logoutButtonModal {
+    background-color: #2082f2;
+    border: none;
+    padding: 15px;
+    padding-right: 25px;
+    padding-left: 25px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .cancelLogoutButtonModal {
+    border: none;
+    padding: 15px;
+    font-weight: bold;
+    border: 2px solid #9baabc;
+    padding-right: 25px;
+    padding-left: 25px;
+    cursor: pointer;
+  }
+  
+  .lightThemeLogoutText {
+    color: white;
+  }
+  
+  .darkThemeLogoutCance {
+    color: #9baabc;
+  }
+  
+  .darkThemeStylingLogoutPopUp {
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+  }
+  
+  .cancelButtonDarkStyling {
+    border: 2px solid #758190;
+    color: #758190;
+  }
+  
+  .lightColorNavBar {
+    color: white;
+  }
+  
+  .darkColorNavBar {
+    color: black;
+  }
+  
+  .headerTransparentBackground {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0px;
+    cursor: pointer;
+  }
+  
+  .mobileNavBarContentsContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .buttonsContainerNavBarMobile {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: flex-end;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .mobileNavBarItem {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: center;
+    padding: 6px;
+  }
+  
+  .activeNavBarMobile {
+    background-color: #f1f5f9;
+  }
+  
+  .arrangeRowWidth {
+    width: 60%;
+  }
+  
+  .paraMobileNavBar {
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .mobileIconStylingNavBar {
+    color: #909090;
+  }
+  
+  .arrangeInRowLinkItem {
+    display: flex;
+    gap: 24px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .wrongSymbolContainer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .darkActiveNavBar {
+    background-color: #383838;
+  }
+  
+  .lightActiveNavBar {
+    background-color: #f1f5f9;
+  }
+  
+  .redIconStyling {
+    color: red;
+  }
+  
+  .wrongStlyingNav {
+    margin-top: 25px;
+    margin-right: 25px;
+  }
+  
+  .darkWrongStyling {
+    color: white;
+  }
+  
+  .linkHeaderStyling {
+    text-decoration: none;
+    color: none;
+  }
+  
+  @media (max-width: 768px) {
+    .headerElements {
+      display: none;
+    }
+    .headerLogo {
+      width: 150px;
+      margin-left: 20px;
+    }
+    .mobileHeaderElements {
+      display: flex;
+      flex-grow: 1;
+      justify-content: flex-end;
+      gap: 28px;
+      padding-right: 20px;
+    }
+    .popup-content {
+      width: 80%;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .mobileHeaderElements {
+      display: none;
+    }
+  }
+  

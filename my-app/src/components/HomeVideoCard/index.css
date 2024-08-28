@@ -1,0 +1,89 @@
+.thumbnailImageHome {
+  width: 100%;
+}
+
+.listItemVideoCard {
+  min-height: 280px;
+  width: 100%;
+  list-style-type: none;
+  margin: 10px;
+}
+
+.channelLogoHome {
+  width: 40px;
+  height: 40px;
+  border-radius: 16px;
+  margin-top: 25px;
+  margin-right: 10px;
+}
+
+.paraHome {
+  font-size: 14px;
+  color: rgb(30, 41, 59);
+  font-weight: 500;
+}
+
+.thumbnailContainerHome {
+  display: flex;
+}
+
+.thumbnailContentsColumn {
+  display: flex;
+  flex-direction: column;
+  margin-top: 25px;
+  gap: 6px;
+  color: rgb(97, 110, 124);
+  font-weight: 400;
+}
+
+.thumbnailArrangeContentsHome {
+  display: flex;
+}
+
+.arrangeViewsAndData {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+p {
+  margin: 0;
+}
+
+.dotStyling {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.listStylingLink {
+  list-style-type: none;
+  text-decoration: none;
+}
+
+.darkThemeColorVideoItem {
+  color: white;
+}
+
+.homeVideoItemCard {
+  width: 30%;
+  margin: 10px;
+}
+
+@media (max-width: 1000px) and (min-width: 576px) {
+  .homeVideoItemCard {
+    width: 45%;
+  }
+}
+
+@media (max-width: 576px) {
+  .homeVideoItemCard {
+    width: 100%;
+  }
+  .listItemVideoCard {
+    margin-left: 0px;
+  }
+  .homeArrangeRowCard {
+    display: flex;
+    gap: 25px;
+  }
+}

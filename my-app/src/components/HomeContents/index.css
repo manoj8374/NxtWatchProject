@@ -1,0 +1,126 @@
+.homeContentsContainer {
+  height: 90vh;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-left: 25px;
+  width: 100%;
+}
+
+.homeContainerBgImage {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
+  height: 270px;
+  background-size: cover;
+}
+
+.bannerInsideContents {
+  width: 32%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 80%;
+  width: 100%;
+  gap: 20px;
+  padding-left: 25px;
+}
+
+.bannerHeading {
+  color: #6e6d69;
+  font-size: 22px;
+}
+
+.bannerLogo {
+  width: 150px;
+}
+
+.bannerButton {
+  background: transparent;
+  border: 2px solid #6e6d69;
+  padding: 10px;
+  color: #6e6d69;
+  font-weight: bold;
+}
+
+.homeContentsSearch {
+  width: 100%;
+  padding: 10px;
+  height: 100%;
+}
+
+.homeContentsSearchContainer {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin-top: 30px;
+  width: 30%;
+}
+
+.homeContentsButton {
+  height: 100%;
+  width: 70px;
+  cursor: pointer;
+  border: none;
+}
+
+.itemsContainerHome {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0px;
+}
+
+.darkBackgroundHomeVideoItem {
+  background-color: #181818;
+}
+
+.darkInputHome {
+  background-color: #181818;
+  color: white;
+  outline: none;
+}
+
+.homeContentsButtonDark {
+  background-color: #313031;
+}
+
+.arrangeCancelButton {
+  align-self: flex-start;
+  margin-right: 25px;
+  font-weight: 100;
+}
+
+.itemsHeaderContents {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.cancelButtonStylingHeader {
+  background: transparent;
+  border: none;
+  outline: none;
+  align-self: flex-start;
+  margin-top: 25px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .homeContentsSearchContainer {
+    width: 90%;
+  }
+}
+
+@media (max-width: 576px) {
+  .itemsContainerHome {
+    padding: 0px;
+  }
+  .homeContentsContainer {
+    padding-left: 0px;
+  }
+  .homeContentsSearchContainer {
+    width: 98%;
+  }
+}

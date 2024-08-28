@@ -1,0 +1,41 @@
+.failureImage {
+  width: 400px;
+}
+
+.failureContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 100px;
+}
+
+.failureButton {
+  background-color: #4a47e0;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  width: 100px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-weight: 600;
+}
+
+.failureHeading {
+  margin: 0px;
+}
+
+.lightThemeHeadingFailure {
+  color: #1f346d;
+}
+
+.failurePara {
+  color: #79838f;
+  font-weight: 500;
+}
+
+.darkThemeHeadingFailure {
+  color: white;
+}
