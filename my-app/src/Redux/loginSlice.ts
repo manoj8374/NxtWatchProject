@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "./store";
+import {fetchLoginDetails} from '../apiCalls'
 
 interface LoginInterface{
     username: string
@@ -23,10 +24,7 @@ export const fetchLogin = createAsyncThunk(
         const {getState} = thunkAPI
         const state = getState() as RootState 
         const {username, password} = state.login
-        const request = await fetch("https://apis.ccbp.in/login", {
-            method: "POST",
-            body: JSON.stringify({username, password})
-        })
+        const request = await fetchLoginDetails(username, password)
         const response = await request.json()
         if(request.ok){
             return response.jwt_token

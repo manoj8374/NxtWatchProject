@@ -5,8 +5,7 @@ import {differenceInYears, parse} from 'date-fns'
 import {BiLike, BiDislike} from 'react-icons/bi'
 import {MdPlaylistAdd} from 'react-icons/md'
 import Cookies from 'js-cookie'
-import { VideoContextInterface, ParamsInterface} from '../Interfaces'
-import {HomeVideoCardDetails} from '../Interfaces/propsInterfaces'
+import { VideoContextInterface} from '../Interfaces'
 import Header from '../Header'
 import SideBar from '../SideBar'
 import {ThemeContext} from '../ThemeContext'
@@ -30,7 +29,6 @@ const VideoItem = () => {
   const {id} = useParams<{id: string}>()
   const {
     theme,
-    toggleTheme,
     saveTheVideo,
     AddToLikeVideo,
     likedVideos,

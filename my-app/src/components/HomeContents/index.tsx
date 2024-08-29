@@ -1,60 +1,79 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, ReactNode} from 'react'
 
 import {FaSearch} from 'react-icons/fa'
-import Cookies from 'js-cookie'
 import {GiCancel} from 'react-icons/gi'
-import { Video } from '../Interfaces'
-import {HomeVideoCardDetails} from '../Interfaces/propsInterfaces'
+import { useDispatch, useSelector } from 'react-redux'
 import HomeVideoCard from '../HomeVideoCard'
 import FailureView from '../FailureScreen'
 import {ThemeContext} from '../ThemeContext'
+import { fetchHomeVideos } from '../../Redux/homeSlice'
+import { AppDispatch, RootState } from '../../Redux/store'
+import Spinner from '../Spinner'
 import './index.css'
 
 const HomeContents = () => {
-  const [data, setData] = useState<HomeVideoCardDetails[]>([])
   const [searchValue, setSearchValue] = useState('')
-  const [isLoading, setIsLoading] = useState(true)
-  const [failedView, setFailedView] = useState(false)
   const [hideBanner, setHideBanner] = useState(false)
   
   const context = useContext(ThemeContext)
   const {theme} = context
 
-  useEffect(() => {
-    const getData = async () => {
-      const jwtToken = Cookies.get('jwt_token')
+  const dispatch = useDispatch<AppDispatch>()
+  const videos = useSelector((state: RootState) => state.home.data)
+  const failedView = useSelector((state: RootState)=> state.home.errorView)
+  const isLoading = useSelector((state: RootState)=> state.home.isLoading)
 
-      const apiUrl = `https://apis.ccbp.in/videos/all?search=${searchValue}`
-      const options = {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-        method: 'GET',
+  useEffect(() => {
+    const getData = async()=>{
+      await dispatch(fetchHomeVideos(searchValue))
       }
-      try {
-        const Data = await fetch(apiUrl, options)
-        const response = await Data.json()
-        const convertedData = response.videos.map((eachItem : Video) => {
-          const obj = {
-            id: eachItem.id,
-            publishedAt: eachItem.published_at,
-            thumbnailUrl: eachItem.thumbnail_url,
-            title: eachItem.title,
-            viewCount: eachItem.view_count,
-            channelName: eachItem.channel.name,
-            profileImageUrl: eachItem.channel.profile_image_url,
-          }
-          return obj
-        })
-        setData(convertedData)
-        setIsLoading(false)
-      } catch (e) {
-        console.log('error')
-        setFailedView(true)
-      }
+      getData()
+  }, [searchValue, dispatch])
+
+  const renderContent = (): ReactNode=>{
+    console.log("Inside Render Content", videos)
+    if(isLoading){
+        return(
+          <Spinner/>
+        )
     }
-    getData()
-  }, [searchValue])
+    if(failedView){
+      return <FailureView/>
+    }
+
+    if(videos.length !== 0){
+      return <ul className="itemsContainerHome">
+    {videos.map(eachItem => (
+      <HomeVideoCard key={eachItem.id} details={eachItem} />
+    ))}
+  </ul>
+    }
+    
+      return (
+        <div className="failureContainer">
+        <img
+          className="failureImage"
+          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+        />
+        <h1
+          className={`${
+            theme === 'Dark'
+              ? 'darkThemeHeadingFailure'
+              : 'lightThemeHeadingFailure'
+          } failureHeading`}
+        >
+          No search Results Found
+        </h1>
+        <p className="failurePara">
+          Try different key words or remove search filter
+        </p>
+        <button onClick={() => setSearchValue('')} className="failureButton">
+          Retry
+        </button>
+      </div>
+      )
+    
+  }
 
   return (
     <div
@@ -102,35 +121,7 @@ const HomeContents = () => {
           <FaSearch size={15} style={{color: 'grey'}} />.
         </button>
       </div>
-      {failedView ? <FailureView /> : null}
-      <ul className="itemsContainerHome">
-        {data.map(eachItem => (
-          <HomeVideoCard key={eachItem.id} details={eachItem} />
-        ))}
-      </ul>
-      {data.length === 0 && !isLoading ? (
-        <div className="failureContainer">
-          <img
-            className="failureImage"
-            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
-          />
-          <h1
-            className={`${
-              theme === 'Dark'
-                ? 'darkThemeHeadingFailure'
-                : 'lightThemeHeadingFailure'
-            } failureHeading`}
-          >
-            No search Results Found
-          </h1>
-          <p className="failurePara">
-            Try different key words or remove search filter
-          </p>
-          <button onClick={() => setSearchValue('')} className="failureButton">
-            Retry
-          </button>
-        </div>
-      ) : null}
+      {renderContent()}
     </div>
   )
 }

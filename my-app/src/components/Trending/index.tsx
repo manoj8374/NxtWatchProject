@@ -1,55 +1,49 @@
-import React, {useState, useEffect, useContext} from 'react'
-import Cookies from 'js-cookie'
-import {FaFire, FaFacebook, FaTwitter, FaLinkedin} from 'react-icons/fa'
-import {Video} from '../Interfaces'
-import {HomeVideoCardDetails} from '../Interfaces/propsInterfaces'
+import React, {useState, useEffect, useContext, ReactNode} from 'react'
+import {FaFire} from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+import {RootState, AppDispatch} from '../../Redux/store'
 import Header from '../Header'
 import SideBar from '../SideBar'
 import TrendingCard from '../TrendingCard'
-
+import {fetchTrendingVideos} from '../../Redux/trendingSlice'
 import {ThemeContext} from '../ThemeContext'
+import Spinner from '../Spinner'
 import './index.css'
+import FailureView from '../FailureScreen'
 
 const Trending = () => {
-  const [data, setData] = useState<HomeVideoCardDetails[]>([])
+  const dispatch = useDispatch<AppDispatch>()
+  const data = useSelector((state: RootState) => state.trending.data)
+  const isLoading = useSelector((state: RootState) => state.trending.isLoading)
+  const errorView = useSelector((state: RootState)=> state.trending.errorView)
+
   const context = useContext(ThemeContext)
-  const {theme, toggleTheme} = context
+  const {theme} = context
 
   useEffect(() => {
     const getData = async () => {
-      const jwtToken = Cookies.get('jwt_token')
-
-      const apiUrl = 'https://apis.ccbp.in/videos/trending'
-      const options = {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-        method: 'GET',
-      }
-
-      try {
-        const Data = await fetch(apiUrl, options)
-        const response = await Data.json()
-
-        const convertedData = response.videos.map((eachItem: Video) => {
-          const obj = {
-            id: eachItem.id,
-            publishedAt: eachItem.published_at,
-            thumbnailUrl: eachItem.thumbnail_url,
-            title: eachItem.title,
-            viewCount: eachItem.view_count,
-            channelName: eachItem.channel.name,
-            profileImageUrl: eachItem.channel.profile_image_url,
-          }
-          return obj
-        })
-        setData(convertedData)
-      } catch (e) {
-        console.log(e)
-      }
+      await dispatch(fetchTrendingVideos())
     }
     getData()
   }, [])
+
+  const renderData = (): ReactNode=>{
+    if(isLoading){
+      return <Spinner />
+    }
+
+    if(errorView){
+      return <FailureView />
+    }
+
+    if(data.length !== 0){
+        return <ul className="trendingUlContainer">
+        {data.map(eachItem => {
+          return <TrendingCard details={eachItem} key={eachItem.id} />
+        })}
+      </ul>
+    }
+  }
 
   return (
     <>
@@ -81,12 +75,7 @@ const Trending = () => {
               Trending
             </h1>
           </div>
-          <ul className="trendingUlContainer">
-            {data.map(eachItem => {
-              let c
-              return <TrendingCard details={eachItem} key={eachItem.id} />
-            })}
-          </ul>
+          {renderData()}
         </div>
       </div>
     </>

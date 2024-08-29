@@ -1,51 +1,54 @@
-import React, {useState, useEffect, useContext} from 'react'
-import Cookies from 'js-cookie'
-import {FaFire, FaFacebook, FaTwitter, FaLinkedin} from 'react-icons/fa'
+import React, {useEffect, useContext, ReactNode} from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {SiYoutubegaming} from 'react-icons/si'
-import {VideoDetails} from '../Interfaces'
-import {GamingCardDetails} from '../Interfaces/propsInterfaces'
+import FailureView from '../FailureScreen'
 import Header from '../Header'
 import SideBar from '../SideBar'
 import GamingCardItem from '../GamingCardItem'
+import {RootState, AppDispatch} from '../../Redux/store'
 import {ThemeContext} from '../ThemeContext'
+import { fetchGamingDetails } from '../../Redux/gameSlice'
+import Spinner from '../Spinner'
+
 import './index.css'
 
 const Gaming = () => {
-  const [data, setData] = useState<GamingCardDetails[]>([])
   const context = useContext(ThemeContext)
   const {theme} = context
 
+  const dispatch = useDispatch<AppDispatch>()
+  const data = useSelector((state: RootState) => state.game.data)
+  const loading = useSelector((state: RootState) => state.game.isLoading)
+  const error = useSelector((state: RootState) => state.game.errorView)
+
   useEffect(() => {
     const getData = async () => {
-      const jwtToken = Cookies.get('jwt_token')
-
-      const apiUrl = 'https://apis.ccbp.in/videos/gaming'
-      const options = {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-        method: 'GET',
-      }
-      try {
-        const Data = await fetch(apiUrl, options)
-        const response = await Data.json()
-        console.log(response)
-        const convertedData = response.videos.map((eachItem: VideoDetails) => {
-          const obj = {
-            id: eachItem.id,
-            thumbnailUrl: eachItem.thumbnail_url,
-            title: eachItem.title,
-            viewCount: eachItem.view_count,
-          }
-          return obj
-        })
-        setData(convertedData)
-      } catch (e) {
-        console.log(e)
-      }
+      const response = await dispatch(fetchGamingDetails())
     }
     getData()
   }, [])
+
+  const renderData = (): ReactNode=>{
+    if(loading){
+      return (
+        <Spinner/>
+        
+      )
+    }
+
+    if(error){
+      return <FailureView/>
+    }
+
+    if(data.length !== 0){
+      return <ul className="gamingULContainer">
+      {data.map(eachItem => {
+        let a
+        return <GamingCardItem key={eachItem.id} details={eachItem} />
+      })}
+    </ul>
+    }
+  }
 
   return (
     <>
@@ -75,12 +78,7 @@ const Gaming = () => {
               Gaming
             </h1>
           </div>
-          <ul className="gamingULContainer">
-            {data.map(eachItem => {
-              let a
-              return <GamingCardItem key={eachItem.id} details={eachItem} />
-            })}
-          </ul>
+          {renderData()}
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {differenceInYears, parse} from 'date-fns'
 import {ThemeContext} from '../ThemeContext'
@@ -11,7 +11,6 @@ const TrendingCard: React.FC<HomeVideoCardInterface> = ({details}) => {
   const {
     id,
     thumbnailUrl,
-    profileImageUrl,
     title,
     channelName,
     viewCount,

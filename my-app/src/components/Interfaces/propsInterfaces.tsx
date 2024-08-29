@@ -20,8 +20,24 @@ export interface HomeVideoCardDetails{
 }
 
 export interface HomeVideoCardInterface{
-    details: HomeVideoCardDetails,
+    details: HomeVideoCardDetails
 }
+
+
+export interface HomeVideoCardDetailsApi{
+    id: string;
+    published_at: string;
+    thumbnail_url: string;
+    title: string;
+    view_count: string;
+    channel: {
+        name: string;
+        profile_image_url: string
+    }
+    channel_name: string,
+    profile_image_url: string;
+}
+
 
 export interface SavedVideoCardDetails{
     id: string;
