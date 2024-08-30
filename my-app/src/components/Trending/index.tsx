@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext, ReactNode} from 'react'
+import React, {useEffect, useContext, ReactNode} from 'react'
 import {FaFire} from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import {RootState, AppDispatch} from '../../Redux/store'

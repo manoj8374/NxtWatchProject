@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loginReducer from './loginSlice'
 import homeReducer from './homeSlice'
 import gameReducer from './gameSlice'
 import trendingReducer from './trendingSlice'
+import videoItemReducer from "./videoItemSlice";
 
 interface Person {
     name: string
@@ -10,10 +10,10 @@ interface Person {
 
 const store = configureStore({
     reducer: {
-        login: loginReducer,
         home: homeReducer,
         game: gameReducer,
-        trending: trendingReducer
+        trending: trendingReducer,
+        videoItem: videoItemReducer
     }
 }) 
 

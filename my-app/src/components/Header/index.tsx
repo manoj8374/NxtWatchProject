@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {useNavigate, Link, useLocation} from 'react-router-dom'
 import {WiMoonWaningCrescent1} from 'react-icons/wi'
 import {TiAdjustBrightness} from 'react-icons/ti'
@@ -21,6 +21,7 @@ const Header: React.FC = () => {
   const {theme, toggleTheme} = context
   const navigate = useNavigate()
   const location = useLocation()
+  const [laptopLogoutPopUp, setLaptopLogoutPopUp] = useState(false)
 
   const BackgroundclassName =
     theme === 'Dark' ? 'darkActiveNavBar' : 'lightActiveNavBar'
@@ -30,8 +31,9 @@ const Header: React.FC = () => {
   }
 
   const logout = () => {
+    
     Cookies.remove('jwt_token')
-    navigate("/")
+    navigate("/login")
   }
 
   const MobileRenderPopUpComponent = ()=>(
@@ -184,7 +186,7 @@ const Header: React.FC = () => {
               Are you sure, you want to logout?
             </h3>
             <div className="buttonContainerLogout">
-              <button
+              <button onClick={()=> setLaptopLogoutPopUp(false)}
                 type="button"
                 className={`${
                   theme === 'Dark' ? 'cancelButtonDarkStyling' : ''
@@ -222,7 +224,7 @@ const Header: React.FC = () => {
         <div className="buttonContainerLogout">
           <button
             type="button"
-            // onClick={() => close()}
+            onClick={()=> setLaptopLogoutPopUp(false)}
             className={`${
               theme === 'Dark' ? 'cancelButtonDarkStyling' : ''
             } cancelLogoutButtonModal lightThemeLogoutText darkThemeLogoutCance`}
@@ -296,7 +298,8 @@ const Header: React.FC = () => {
         >
           {MobileRenderPopUpComponent()}
         </Popup>
-        <Popup
+        <Popup 
+        // open = {true}
           contentStyle={{
             backgroundColor: `${theme === 'Dark' ? '#212121' : ''}`,
           }}
@@ -345,7 +348,7 @@ const Header: React.FC = () => {
             backgroundColor: `${theme === 'Dark' ? '#212121' : ''}`,
           }}
           modal
-          trigger={<button className="logoutStyling">Logout</button>}
+          trigger={<button className="logoutStyling" onClick={()=> setLaptopLogoutPopUp(true)}>Logout</button>}
           position="bottom center"
         >
             {ConfirmPopUp()}

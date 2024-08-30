@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 import {HomeVideoCardDetailsApi} from '../components/Interfaces/propsInterfaces'
-import {VideoDetails, Video} from '../components/Interfaces'
+import {VideoDetails, Video, VideoContextInterface} from '../components/Interfaces'
+import {differenceInYears, parse} from 'date-fns'
 
 export const fetchLoginDetails = async (username: string, password: string)=>{
     const response = await fetch("https://apis.ccbp.in/login", {
@@ -32,11 +33,10 @@ export const fetchHomeDetails = async(searchValue: string)=>{
             }
             return obj
         })
-        console.log(convertedData)
         return convertedData
     }
     
-    throw new Error(data.error_msg)
+    throw new Error("Error Has Occured")
 }
 
 export const fetchGameDetails = async()=>{
@@ -48,7 +48,6 @@ export const fetchGameDetails = async()=>{
     }
   })
   const data = await response.json()
-  console.log(data)
   if(response.ok){
     const convertedData = data.videos.map((eachItem: VideoDetails) => {
       const obj = {
@@ -61,6 +60,8 @@ export const fetchGameDetails = async()=>{
     })
     return convertedData
   }
+
+  throw new Error("Error Has Occured")
 }
 
 export const fetchTrendingDetails = async()=>{
@@ -86,5 +87,41 @@ export const fetchTrendingDetails = async()=>{
     })
     return convertedData
   }
-  throw new Error(data.error_msg)
+  throw new Error("Error Has Occured")
+}
+
+export const fetchVideoItemDetails = async(id: string)=>{
+  const jwtToken = Cookies.get('jwt_token');
+  const response = await fetch(`https://apis.ccbp.in/videos/${id}`,{
+    method: 'GET',
+  headers: {
+    Authorization: `Bearer ${jwtToken}`,
+  }})
+  const data = await response.json()
+  const parsedDate = parse(
+    data.video_details.published_at,
+    'MMMM dd, yyyy',
+    new Date(),
+  )
+  const currentDate = new Date()
+  const ageInYears = differenceInYears(currentDate, parsedDate)
+  const obj = {
+    id: data.video_details.id,
+    description: data.video_details.description,
+    publishedAt: data.video_details.published_at,
+    thumbnailUrl: data.video_details.thumbnail_url,
+    title: data.video_details.title,
+    videoUrl: data.video_details.video_url,
+    viewCount: data.video_details.view_count,
+    channelName: data.video_details.channel.name,
+    profileImageUrl: data.video_details.channel.profile_image_url,
+    subscriberCount: data.video_details.channel.subscriber_count,
+    ageOfTheVideo: ageInYears,
+  }
+  if(response.ok){
+    const convertedData = data.video_details
+    return obj
+  }
+  throw new Error("Something went wrong")
+  
 }

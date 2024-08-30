@@ -12,7 +12,7 @@ import Spinner from '../Spinner'
 
 import './index.css'
 
-const Gaming = () => {
+const Gaming: React.FC = () => {
   const context = useContext(ThemeContext)
   const {theme} = context
 
@@ -29,6 +29,7 @@ const Gaming = () => {
   }, [])
 
   const renderData = (): ReactNode=>{
+    console.log(data, "data rendering")
     if(loading){
       return (
         <Spinner/>
@@ -38,16 +39,16 @@ const Gaming = () => {
 
     if(error){
       return <FailureView/>
+      console.log("Error has occured")
     }
 
-    if(data.length !== 0){
       return <ul className="gamingULContainer">
       {data.map(eachItem => {
         let a
         return <GamingCardItem key={eachItem.id} details={eachItem} />
       })}
     </ul>
-    }
+    
   }
 
   return (

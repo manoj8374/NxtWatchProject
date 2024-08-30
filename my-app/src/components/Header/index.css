@@ -61,16 +61,16 @@
   .logoutPopUpContainer {
     display: flex;
     flex-direction: column;
-    gap: 15x;
+    justify-content: center;
     align-items: center;
+    height: 100%;
+    gap: 40px;
   }
   
   .popup-content {
-    width: 40%;
+    width: 30%;
     border-radius: 15px;
-    padding: 25px;
-    padding-bottom: 0px;
-    height: 180px;
+    height: 200px;
     border: none;
   }
   
@@ -117,6 +117,8 @@
     color: white;
     font-weight: 500;
     font-size: 20px;
+    padding: 0px;
+    margin: 0px;
   }
   
   .cancelButtonDarkStyling {
