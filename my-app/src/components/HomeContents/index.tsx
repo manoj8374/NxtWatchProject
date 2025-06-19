@@ -1,37 +1,29 @@
 import React, {useState, useEffect, useContext, ReactNode} from 'react'
-
 import {FaSearch} from 'react-icons/fa'
 import {GiCancel} from 'react-icons/gi'
-import { useDispatch, useSelector } from 'react-redux'
 import HomeVideoCard from '../HomeVideoCard'
 import FailureView from '../FailureScreen'
-import {ThemeContext} from '../ThemeContext'
-import { fetchHomeVideos } from '../../Redux/homeSlice'
-import { AppDispatch, RootState } from '../../Redux/store'
 import Spinner from '../Spinner'
 import './index.css'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 
-const HomeContents = () => {
+const HomeContents = observer(() => {
   const [searchValue, setSearchValue] = useState('')
   const [hideBanner, setHideBanner] = useState(false)
   
-  const context = useContext(ThemeContext)
-  const {theme} = context
+  const { themeStore } = useStores()
+  const { theme } = themeStore
 
-  const dispatch = useDispatch<AppDispatch>()
-  const videos = useSelector((state: RootState) => state.home.data)
-  const failedView = useSelector((state: RootState)=> state.home.errorView)
-  const isLoading = useSelector((state: RootState)=> state.home.isLoading)
+  const { homeStore } = useStores()
+  const { data: videos, errorView: failedView, isLoading } = homeStore
 
   useEffect(() => {
-    const getData = async()=>{
-      await dispatch(fetchHomeVideos(searchValue))
-      }
-      getData()
-  }, [searchValue, dispatch])
+    homeStore.fetchVideos(searchValue)
+    // eslint-disable-next-line
+  }, [searchValue])
 
   const renderContent = (): ReactNode=>{
-    console.log("Inside Render Content", videos)
     if(isLoading){
         return(
           <Spinner/>
@@ -124,6 +116,6 @@ const HomeContents = () => {
       {renderContent()}
     </div>
   )
-}
+})
 
 export default HomeContents

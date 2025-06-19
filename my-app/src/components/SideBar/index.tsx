@@ -1,11 +1,11 @@
 import React from 'react'
-import {useContext} from 'react'
 import {Link, useLocation} from 'react-router-dom'
 import {IoMdHome} from 'react-icons/io'
 import {FaFire, FaFacebook, FaTwitter, FaLinkedin} from 'react-icons/fa'
 import {SiYoutubegaming} from 'react-icons/si'
 import {MdPlaylistAdd} from 'react-icons/md'
-import {ThemeContext} from '../ThemeContext'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 import './index.css'
 
 const buttonsList = [
@@ -27,10 +27,10 @@ const buttonsList = [
   },
 ]
 
-const SideBar = () => {
+const SideBar = observer(() => {
   const location = useLocation()
-  const context = useContext(ThemeContext)
-  const {theme, toggleTheme} = context
+  const { themeStore } = useStores()
+  const { theme } = themeStore
   return (
     <div
       className={`${
@@ -91,6 +91,6 @@ const SideBar = () => {
       </div>
     </div>
   )
-}
+})
 
 export default SideBar

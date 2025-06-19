@@ -1,13 +1,14 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
-import {ThemeContext} from '../ThemeContext'
 import {GamingCardItemInterface} from '../Interfaces/propsInterfaces'
 import './index.css'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 
-const GamingCardItem: React.FC<GamingCardItemInterface> = ({details}) => {
+const GamingCardItem: React.FC<GamingCardItemInterface> = observer(({details}) => {
   const {id, thumbnailUrl, title, viewCount} = details
-  const context = useContext(ThemeContext)
-  const {theme, toggleTheme} = context
+  const { themeStore } = useStores()
+  const { theme } = themeStore
   return (
     <Link to={`/videos/${id}`} className="listStylingLink gamingLinkItem">
       <li className="gamingListItem">
@@ -25,6 +26,6 @@ const GamingCardItem: React.FC<GamingCardItemInterface> = ({details}) => {
       </li>
     </Link>
   )
-}
+})
 
 export default GamingCardItem

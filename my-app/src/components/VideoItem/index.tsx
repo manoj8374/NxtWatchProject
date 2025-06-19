@@ -5,16 +5,15 @@ import {differenceInYears, parse} from 'date-fns'
 import {BiLike, BiDislike} from 'react-icons/bi'
 import {MdPlaylistAdd} from 'react-icons/md'
 import Cookies from 'js-cookie'
-import { useDispatch, useSelector } from 'react-redux'
 import { VideoContextInterface} from '../Interfaces'
 import Header from '../Header'
 import SideBar from '../SideBar'
 import {ThemeContext} from '../ThemeContext'
-import { RootState, AppDispatch } from '../../Redux/store'
-import {fetchVideoItem} from '../../Redux/videoItemSlice'
 import './index.css'
 import Spinner from '../Spinner'
 import FailureView from '../FailureScreen'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 
 const sampleData = {
   id: "",
@@ -28,54 +27,41 @@ const sampleData = {
   profileImageUrl: "",
   subscriberCount: "",
   ageOfTheVideo: 0,
-} //doubt clarify it tomorrow, doubt clarify it 
+}
 
-const VideoItem = () => {
+const VideoItem = observer(() => {
   const {id} = useParams<{id: string}>()
-  const dispatch = useDispatch<AppDispatch>()
-  const data = useSelector((state: RootState) => state.videoItem.data)
-  const isLoading = useSelector((state: RootState) => state.videoItem.loading)
-  const errorView = useSelector((state: RootState) => state.videoItem.errorView)
-  const {
-    theme,
-    saveTheVideo,
-    AddToLikeVideo,
-    likedVideos,
-    AddToDislikeVideo,
-    dislikedVideos,
-    savedVideos,
-  } = useContext(ThemeContext)
+  const { videoItemStore, savedVideosStore, userPreferencesStore, themeStore } = useStores()
+  const data = videoItemStore.data || sampleData
+  const isLoading = videoItemStore.loading
+  const errorView = videoItemStore.errorView
+  const { theme } = themeStore
 
   useEffect(() => {
-
-    const getData = async () => {
-      if(id){
-        await dispatch(fetchVideoItem(id))
-      }
+    if(id){
+      videoItemStore.fetchVideoItem(id)
     }
-    getData()
-  }, [])
+  }, [id])
 
   const addVideo = () => {
-    saveTheVideo(data)
+    savedVideosStore.saveVideo(data)
   }
 
   const addToLikedVideos = () => {
     if(id){
-      AddToLikeVideo(id)
+      userPreferencesStore.addToLikedVideos(id)
     } 
   }
 
   const addToDislikedVideos = () => {
     if(id){
-        AddToDislikeVideo(id)
+        userPreferencesStore.addToDislikedVideos(id)
     }
   }
 
-
-  const LikedclassName = id && likedVideos.includes(id) ? 'likedStyling' : ''
-  const DislikedclassName = id && dislikedVideos.includes(id) ? 'likedStyling' : ''
-  const SavedClassName = savedVideos.some(eachItem => eachItem.id === id)
+  const LikedclassName = id && userPreferencesStore.isVideoLiked(id) ? 'likedStyling' : ''
+  const DislikedclassName = id && userPreferencesStore.isVideoDisliked(id) ? 'likedStyling' : ''
+  const SavedClassName = savedVideosStore.isVideoSaved(id || '')
     ? 'likedStyling'
     : ''
 
@@ -151,7 +137,7 @@ const VideoItem = () => {
                   className={`${SavedClassName} reactionStylingIcon`}
                 />
                 <p className={`${SavedClassName} paraIconStyling`}>
-                  {savedVideos.some(eachItem => eachItem.id === id)
+                  {savedVideosStore.isVideoSaved(id || '')
                     ? 'Saved'
                     : 'Save'}
                 </p>
@@ -177,6 +163,6 @@ const VideoItem = () => {
   )}
 
   return null
-}
+})
 
 export default VideoItem

@@ -4,13 +4,17 @@ import {FaFire, FaFacebook, FaTwitter, FaLinkedin} from 'react-icons/fa'
 import Header from '../Header'
 import SideBar from '../SideBar'
 import SavedVideoItem from '../SavedVideoItem'
-
-import {ThemeContext} from '../ThemeContext'
 import {VideoItemInterface} from '../Interfaces'
 import './index.css'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 
-const SavedVideos = () => {
-  const {theme, savedVideos} = useContext(ThemeContext)
+const SavedVideos = observer(() => {
+  const { themeStore } = useStores()
+  const { theme } = themeStore
+  const { savedVideosStore } = useStores()
+  const { savedVideos, savedVideosCount } = savedVideosStore
+
   return (
     <>
       <Header />
@@ -38,7 +42,7 @@ const SavedVideos = () => {
                   : 'lightThemeHeading'
               }`}
             >
-              Saved Videos
+              Saved Videos ({savedVideosCount})
             </h1>
           </div>
           {savedVideos.length === 0 ? (
@@ -68,16 +72,15 @@ const SavedVideos = () => {
             </div>
           ) : (
             <ul className="savedVideosUlContainer">
-              {savedVideos.map((eachItem: VideoItemInterface) => {
-                let c
-                return <SavedVideoItem key={eachItem.id} details={eachItem} />
-              })}
+              {savedVideos.map((eachItem: VideoItemInterface) => (
+                <SavedVideoItem key={eachItem.id} details={eachItem} />
+              ))}
             </ul>
           )}
         </div>
       </div>
     </>
   )
-}
+})
 
 export default SavedVideos

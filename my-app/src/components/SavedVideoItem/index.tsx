@@ -1,10 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
-import {ThemeContext} from '../ThemeContext'
 import {SavedVideoItemInterface} from '../Interfaces/propsInterfaces'
 import './index.css'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 
-const SavedVideoItem: React.FC <SavedVideoItemInterface> = ({details}) => {
+const SavedVideoItem: React.FC <SavedVideoItemInterface> = observer(({details}) => {
   const {
     title,
     thumbnailUrl,
@@ -13,7 +14,8 @@ const SavedVideoItem: React.FC <SavedVideoItemInterface> = ({details}) => {
     ageOfTheVideo,
     id,
   } = details
-  const {theme, toggleTheme} = useContext(ThemeContext)
+  const { themeStore } = useStores()
+  const { theme } = themeStore
   return (
     <Link to={`/videos/${id}`} className="listStylingLink">
       <li className="listStylingSavedVideoItem">
@@ -49,6 +51,6 @@ const SavedVideoItem: React.FC <SavedVideoItemInterface> = ({details}) => {
       </li>
     </Link>
   )
-}
+})
 
 export default SavedVideoItem

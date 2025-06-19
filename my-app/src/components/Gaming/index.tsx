@@ -1,54 +1,45 @@
 import React, {useEffect, useContext, ReactNode} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import {SiYoutubegaming} from 'react-icons/si'
 import FailureView from '../FailureScreen'
 import Header from '../Header'
 import SideBar from '../SideBar'
 import GamingCardItem from '../GamingCardItem'
-import {RootState, AppDispatch} from '../../Redux/store'
-import {ThemeContext} from '../ThemeContext'
-import { fetchGamingDetails } from '../../Redux/gameSlice'
 import Spinner from '../Spinner'
-
 import './index.css'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 
-const Gaming: React.FC = () => {
-  const context = useContext(ThemeContext)
-  const {theme} = context
+const Gaming: React.FC = observer(() => {
+  const { themeStore } = useStores()
+  const { theme } = themeStore
 
-  const dispatch = useDispatch<AppDispatch>()
-  const data = useSelector((state: RootState) => state.game.data)
-  const loading = useSelector((state: RootState) => state.game.isLoading)
-  const error = useSelector((state: RootState) => state.game.errorView)
+  const { gamingStore } = useStores()
+  const { data, isLoading: loading, errorView: error, gamingCount } = gamingStore
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await dispatch(fetchGamingDetails())
-    }
-    getData()
+    gamingStore.fetchGamingVideos()
+    // eslint-disable-next-line
   }, [])
 
   const renderData = (): ReactNode=>{
-    console.log(data, "data rendering")
     if(loading){
       return (
         <Spinner/>
-        
       )
     }
 
     if(error){
       return <FailureView/>
-      console.log("Error has occured")
     }
 
-      return <ul className="gamingULContainer">
-      {data.map(eachItem => {
-        let a
-        return <GamingCardItem key={eachItem.id} details={eachItem} />
-      })}
-    </ul>
-    
+    return <>
+      {/* <div style={{margin: '10px 0', fontWeight: 'bold'}}>Gaming Count: {gamingCount}</div> */}
+      <ul className="gamingULContainer">
+        {data.map(eachItem => (
+          <GamingCardItem key={eachItem.id} details={eachItem} />
+        ))}
+      </ul>
+    </>
   }
 
   return (
@@ -84,6 +75,6 @@ const Gaming: React.FC = () => {
       </div>
     </>
   )
-}
+})
 
 export default Gaming

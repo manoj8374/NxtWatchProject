@@ -1,10 +1,12 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {ThemeContext} from '../ThemeContext'
 import './index.css'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 
-const FailureView = () => {
-  const context = useContext(ThemeContext)
-  const {theme} = context
+const FailureView = observer(() => {
+  const { themeStore } = useStores()
+  const { theme } = themeStore
   return (
     <div className="failureContainer">
       <img
@@ -26,6 +28,6 @@ const FailureView = () => {
       <button className="failureButton">Retry</button>
     </div>
   )
-}
+})
 
 export default FailureView

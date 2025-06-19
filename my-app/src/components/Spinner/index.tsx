@@ -1,11 +1,11 @@
-import { useContext } from "react";
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 import ClipLoader from "react-spinners/ClipLoader";
-import {ThemeContext} from '../ThemeContext'
 import './index.css'
 
-export default function Spinner() {
-    const context = useContext(ThemeContext)
-    const {theme} = context
+const Spinner = observer(() => {
+    const { themeStore } = useStores()
+    const { theme } = themeStore
     const renderData = ()=>{
         if(theme === "Dark"){
             return (
@@ -20,4 +20,6 @@ export default function Spinner() {
     return (
         renderData()
     )
-}
+})
+
+export default Spinner

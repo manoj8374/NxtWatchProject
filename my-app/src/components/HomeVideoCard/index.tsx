@@ -1,13 +1,14 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import {Link} from 'react-router-dom'
 import {differenceInYears, parse} from 'date-fns'
-import {ThemeContext} from '../ThemeContext'
 import {HomeVideoCardInterface} from '../Interfaces/propsInterfaces'
 import './index.css'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 
-const HomeVideoCard: React.FC<HomeVideoCardInterface> = ({details}) => {
-  const context = useContext(ThemeContext)
-  const {theme} = context
+const HomeVideoCard: React.FC<HomeVideoCardInterface> = observer(({details}) => {
+  const { themeStore } = useStores()
+  const { theme } = themeStore
   const {
     id,
     thumbnailUrl,
@@ -51,6 +52,6 @@ const HomeVideoCard: React.FC<HomeVideoCardInterface> = ({details}) => {
       </li>
     </Link>
   )
-}
+})
 
 export default HomeVideoCard

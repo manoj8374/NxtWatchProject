@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { stores, StoresContext } from './stores';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,11 +15,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+    <StoresContext.Provider value={stores}>
     <BrowserRouter>
     <ThemeProvider>
     <App />
     </ThemeProvider>
     </BrowserRouter> 
+    </StoresContext.Provider>   
     </Provider>   
   </React.StrictMode>
 );

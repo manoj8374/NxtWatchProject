@@ -1,9 +1,8 @@
-import React, {useContext, useEffect, useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, {useEffect, useState} from 'react'
 import Cookies from 'js-cookie'
-import {ThemeContext} from '../ThemeContext'
 import { useNavigate } from 'react-router-dom'
 import './index.css'
+import { useStores } from '../../stores'
 
 interface LoginInterface{
     username: string
@@ -11,8 +10,8 @@ interface LoginInterface{
 }
 
 const Login: React.FC = () => {
-  const context = useContext(ThemeContext)
-  const {theme, toggleTheme} = context
+  const { themeStore } = useStores()
+  const { theme, toggleTheme } = themeStore
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -20,10 +19,8 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false)
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const onSubmitSuccess = (token: string) => {
-    console.log(token)
     Cookies.set('jwt_token', token, {expires: 7})
     navigate('/')
   }
@@ -35,7 +32,6 @@ const Login: React.FC = () => {
       method: 'POST',
       body: JSON.stringify(data),
     }
-
 
     const responseData = await fetch('https://apis.ccbp.in/login', options)
     const dataResponse = await responseData.json()

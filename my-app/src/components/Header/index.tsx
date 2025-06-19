@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import {useNavigate, Link, useLocation} from 'react-router-dom'
 import {WiMoonWaningCrescent1} from 'react-icons/wi'
 import {TiAdjustBrightness} from 'react-icons/ti'
@@ -9,16 +9,14 @@ import {IoIosLogOut, IoMdHome} from 'react-icons/io'
 import {SiYoutubegaming} from 'react-icons/si'
 import {MdPlaylistAdd} from 'react-icons/md'
 import {FaFire} from 'react-icons/fa'
-import {ThemeContext} from '../ThemeContext'
 import 'reactjs-popup/dist/index.css'
 import './index.css'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 
-const Header: React.FC = () => {
-  const context = useContext(ThemeContext)
-  if (!context) {
-    throw new Error('ThemeToggleButton must be used within a ThemeProvider');
-  }
-  const {theme, toggleTheme} = context
+const Header: React.FC = observer(() => {
+  const { themeStore } = useStores()
+  const { theme, toggleTheme } = themeStore
   const navigate = useNavigate()
   const location = useLocation()
   const [laptopLogoutPopUp, setLaptopLogoutPopUp] = useState(false)
@@ -27,11 +25,13 @@ const Header: React.FC = () => {
     theme === 'Dark' ? 'darkActiveNavBar' : 'lightActiveNavBar'
 
   const toogleMode = () => {
-    toggleTheme()
+    console.log("Toogle mode called")
+    //bind this to the toggleTheme function
+    toggleTheme.bind(this)()
+    // toggleTheme()
   }
 
   const logout = () => {
-    
     Cookies.remove('jwt_token')
     navigate("/login")
   }
@@ -356,6 +356,6 @@ const Header: React.FC = () => {
       </div>
     </div>
   )
-}
+})
 
 export default Header

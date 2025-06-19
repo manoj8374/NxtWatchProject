@@ -1,30 +1,23 @@
 import React, {useEffect, useContext, ReactNode} from 'react'
 import {FaFire} from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
-import {RootState, AppDispatch} from '../../Redux/store'
 import Header from '../Header'
 import SideBar from '../SideBar'
 import TrendingCard from '../TrendingCard'
-import {fetchTrendingVideos} from '../../Redux/trendingSlice'
-import {ThemeContext} from '../ThemeContext'
 import Spinner from '../Spinner'
 import './index.css'
 import FailureView from '../FailureScreen'
+import { observer } from 'mobx-react-lite'
+import { useStores } from '../../stores'
 
-const Trending = () => {
-  const dispatch = useDispatch<AppDispatch>()
-  const data = useSelector((state: RootState) => state.trending.data)
-  const isLoading = useSelector((state: RootState) => state.trending.isLoading)
-  const errorView = useSelector((state: RootState)=> state.trending.errorView)
+const Trending = observer(() => {
+  const { trendingStore } = useStores()
+  const { data, isLoading, errorView, trendingCount } = trendingStore
 
-  const context = useContext(ThemeContext)
-  const {theme} = context
+  const { themeStore } = useStores()
+  const { theme } = themeStore
 
   useEffect(() => {
-    const getData = async () => {
-      await dispatch(fetchTrendingVideos())
-    }
-    getData()
+    trendingStore.fetchTrendingVideos()
   }, [])
 
   const renderData = (): ReactNode=>{
@@ -37,11 +30,14 @@ const Trending = () => {
     }
 
     if(data.length !== 0){
-        return <ul className="trendingUlContainer">
-        {data.map(eachItem => {
-          return <TrendingCard details={eachItem} key={eachItem.id} />
-        })}
-      </ul>
+        return <>
+          {/* <div style={{margin: '10px 0', fontWeight: 'bold'}}>Trending Count: {trendingCount}</div> */}
+          <ul className="trendingUlContainer">
+            {data.map(eachItem => (
+              <TrendingCard details={eachItem} key={eachItem.id} />
+            ))}
+          </ul>
+        </>
     }
   }
 
@@ -80,6 +76,6 @@ const Trending = () => {
       </div>
     </>
   )
-}
+})
 
 export default Trending
