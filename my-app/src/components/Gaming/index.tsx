@@ -14,11 +14,10 @@ const Gaming: React.FC = observer(() => {
   const { theme } = themeStore
 
   const { gamingStore } = useStores()
-  const { data, isLoading: loading, errorView: error, gamingCount } = gamingStore
+  const { data, isLoading: loading, errorView: error } = gamingStore
 
   useEffect(() => {
     gamingStore.fetchGamingVideos()
-    // eslint-disable-next-line
   }, [])
 
   const renderData = (): ReactNode=>{
@@ -33,7 +32,6 @@ const Gaming: React.FC = observer(() => {
     }
 
     return <>
-      {/* <div style={{margin: '10px 0', fontWeight: 'bold'}}>Gaming Count: {gamingCount}</div> */}
       <ul className="gamingULContainer">
         {data.map(eachItem => (
           <GamingCardItem key={eachItem.id} details={eachItem} />
@@ -47,7 +45,7 @@ const Gaming: React.FC = observer(() => {
       <Header />
       <div className="HomePageMainContainer">
         <SideBar />
-        <div
+        <div data-testid="gamingMainPageContainer"
           className={`${
             theme === 'Dark' ? 'darkContainerGaming' : ''
           } gamingMainPageContainer`}
@@ -62,7 +60,7 @@ const Gaming: React.FC = observer(() => {
             <div className="iconBackground">
               <SiYoutubegaming style={{color: 'red'}} size={40} />
             </div>
-            <h1
+              <h1 data-testid="gamingHeading"
               className={`${
                 theme === 'Dark' ? 'gamingMainHeadingDark' : ''
               } lightThemeHeading`}

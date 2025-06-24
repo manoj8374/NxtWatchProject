@@ -10,7 +10,7 @@ const GamingCardItem: React.FC<GamingCardItemInterface> = observer(({details}) =
   const { themeStore } = useStores()
   const { theme } = themeStore
   return (
-    <Link to={`/videos/${id}`} className="listStylingLink gamingLinkItem">
+    <Link to={`/videos/${id}`} className="listStylingLink gamingLinkItem" data-testid="gamingCardItem">
       <li className="gamingListItem">
         <img className="gamingThumbnailImage" src={thumbnailUrl} />
         <div className="arrangeContentsGaming">

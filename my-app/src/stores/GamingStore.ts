@@ -21,6 +21,7 @@ class GamingStore {
       runInAction(() => {
         this.data = videos;
         this.isLoading = false;
+        console.log(videos)
       });
     } catch (e) {
       runInAction(() => {
