@@ -67,7 +67,7 @@ const HomeContents = observer(() => {
   }
 
   return (
-    <div
+    <div data-testid="homeContentsContainer"
       className={`${
         theme === 'Dark' ? 'darkBackgroundHomeVideoItem' : ''
       } homeContentsContainer`}

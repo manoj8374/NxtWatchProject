@@ -152,3 +152,39 @@ describe("No Videos Testing",()=>{
         expect(mockFetchVideos).toHaveBeenCalledWith('')
     })
 })  
+
+
+//testing for dark theme
+
+describe('Dark Theme Testing', () => {
+    beforeEach(() => {
+      mockUseStores = () => ({
+        themeStore: { theme: 'Dark' },
+        homeStore: {
+          fetchVideos: mockFetchVideos,
+          data: [],
+          errorView: false,
+          isLoading: false,
+        },
+      })
+    })
+  
+    it('applies dark theme classes correctly', () => {
+      renderComponent()
+  
+      expect(
+        screen.getByTestId('homeContentsContainer')
+      ).toHaveClass('darkBackgroundHomeVideoItem')
+
+      const input = screen.getByPlaceholderText('Search')
+      expect(input).toHaveClass('darkInputHome')
+    })
+  
+    it('renders no videos screen with dark heading class', () => {
+      renderComponent()
+  
+      const heading = screen.getByText('No search Results Found')
+      expect(heading).toHaveClass('darkThemeHeadingFailure')
+    })
+  })
+  
