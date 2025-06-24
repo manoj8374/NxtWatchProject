@@ -46,7 +46,7 @@ const Trending = observer(() => {
       <Header />
       <div className="HomePageMainContainer">
         <SideBar />
-        <div
+        <div data-testid="trendingMainPageContainer"
           className={`${
             theme === 'Dark' ? 'darkThemeTrendingPage' : ''
           } mainTrendingPageContainer`}
@@ -61,7 +61,7 @@ const Trending = observer(() => {
             <div className="iconBackground">
               <FaFire style={{color: 'red'}} size={40} />
             </div>
-            <h1
+            <h1 data-testid="trendingHeading"
               className={`${
                 theme === 'Dark'
                   ? 'darkThemeTrendingHeading'

@@ -73,7 +73,7 @@ const VideoItem = observer(() => {
       return <FailureView/>
     }
     return (
-      <div
+      <div data-testid="videoItemContainer"
       className={`${
         theme === 'Dark' ? 'videoItemDarkTheme' : ''
       } videoItemContainer`}
@@ -161,8 +161,6 @@ const VideoItem = observer(() => {
       </div>
     </>
   )}
-
-  return null
 })
 
 export default VideoItem

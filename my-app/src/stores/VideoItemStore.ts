@@ -19,6 +19,7 @@ class VideoItemStore {
       runInAction(() => {
         this.data = video;
         this.loading = false;
+        console.log(video);
       });
     } catch (e) {
       runInAction(() => {

@@ -21,7 +21,7 @@ const TrendingCard: React.FC<HomeVideoCardInterface> = observer(({details}) => {
   const currentDate = new Date()
   const ageInYears = differenceInYears(currentDate, parsedDate)
   return (
-    <Link to={`/videos/${id}`} className="listStylingLink">
+    <Link data-testid="trendingCard" to={`/videos/${id}`} className="listStylingLink">
       <li className="trendingCardListItem">
         <img className="trendingImageThumbnail" src={thumbnailUrl} />
         <div>
