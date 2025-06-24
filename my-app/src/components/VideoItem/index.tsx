@@ -161,6 +161,8 @@ const VideoItem = observer(() => {
       </div>
     </>
   )}
+
+  return null
 })
 
 export default VideoItem
