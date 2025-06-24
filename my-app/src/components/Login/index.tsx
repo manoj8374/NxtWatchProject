@@ -61,9 +61,6 @@ const Login: React.FC = () => {
     }
   },[])
 
-  if(Cookies.get("jwt_token")){
-    return null
-  }
 
   return (
     <div
@@ -95,7 +92,7 @@ const Login: React.FC = () => {
             className="inputStylingLogin"
             placeholder="Username"
             id="username"
-            name = "username"
+            name = "username" data-testid="username"
           />
           <label
             className={`${theme === 'Dark' ? 'darkLabel' : ''} labelLogin`}
@@ -110,6 +107,7 @@ const Login: React.FC = () => {
             id="password"
             placeholder="Password"
             type={`${showPassword ? 'text' : 'password'}`}
+            data-testid="password"
           />
           <div>
             <label className={`${theme === 'Dark' ? 'darkLabel' : ''}`}>
@@ -121,11 +119,11 @@ const Login: React.FC = () => {
             /> Show Password
             </label>
           </div>
-          <button onClick={submitForm} className="loginButtonStyling">
+          <button onClick={submitForm} className="loginButtonStyling" data-testid="loginButton">
             Login
           </button>
           {formStatus !== '' ? (
-            <p className={`${theme === 'Dark' ? 'loginFormErrorMessage' : ''}`}>
+            <p data-testid="loginFormErrorMessage" className={`${theme === 'Dark' ? 'loginFormErrorMessage' : ''}`}>
               *{formStatus}
             </p>
           ) : null}
