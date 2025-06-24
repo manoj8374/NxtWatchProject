@@ -23,7 +23,7 @@ const HomeVideoCard: React.FC<HomeVideoCardInterface> = observer(({details}) => 
   const ageInYears = differenceInYears(currentDate, parsedDate)
 
   return (
-    <Link to={`/videos/${id}`} className="listStylingLink homeVideoItemCard">
+    <Link to={`/videos/${id}`} className="listStylingLink homeVideoItemCard" data-testid="homeVideoCard">
       <li className="listItemVideoCard">
         <img src={thumbnailUrl} className="thumbnailImageHome" />
         <div className="thumbnailArrangeContentsHome">
@@ -42,7 +42,7 @@ const HomeVideoCard: React.FC<HomeVideoCardInterface> = observer(({details}) => 
               <p>{channelName}</p>
               <div className="arrangeViewsAndData">
                 <p>
-                  {viewCount} views <span className="dotStyling">.</span>
+                  {viewCount} views<span className="dotStyling">.</span>
                 </p>
                 <p>{ageInYears} years ago</p>
               </div>

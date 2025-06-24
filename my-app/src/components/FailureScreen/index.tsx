@@ -1,5 +1,3 @@
-import React, {useEffect, useState, useContext} from 'react'
-import {ThemeContext} from '../ThemeContext'
 import './index.css'
 import { observer } from 'mobx-react-lite'
 import { useStores } from '../../stores'
@@ -8,7 +6,7 @@ const FailureView = observer(() => {
   const { themeStore } = useStores()
   const { theme } = themeStore
   return (
-    <div className="failureContainer">
+    <div data-testid="failureScreen" className="failureContainer">
       <img
         className="failureImage"
         src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"

@@ -20,7 +20,6 @@ const HomeContents = observer(() => {
 
   useEffect(() => {
     homeStore.fetchVideos(searchValue)
-    // eslint-disable-next-line
   }, [searchValue])
 
   const renderContent = (): ReactNode=>{
@@ -36,13 +35,13 @@ const HomeContents = observer(() => {
     if(videos.length !== 0){
       return <ul className="itemsContainerHome">
     {videos.map(eachItem => (
-      <HomeVideoCard key={eachItem.id} details={eachItem} />
+      <HomeVideoCard  key={eachItem.id} details={eachItem} />
     ))}
   </ul>
     }
     
       return (
-        <div className="failureContainer">
+        <div data-testid="noVideosScreen" className="failureContainer">
         <img
           className="failureImage"
           src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
@@ -74,7 +73,7 @@ const HomeContents = observer(() => {
       } homeContentsContainer`}
     >
       {!hideBanner ? (
-        <div className="homeContainerBgImage">
+        <div className="homeContainerBgImage" data-testid="banner">
           <div className="bannerInsideContents">
             <div className="itemsHeaderContents">
               <img
@@ -86,7 +85,7 @@ const HomeContents = observer(() => {
               </p>
               <button className="bannerButton">GET IT NOW</button>
             </div>
-            <button
+            <button data-testid="cancelBannerButton"
               className="cancelButtonStylingHeader"
               onClick={() => setHideBanner(true)}
             >

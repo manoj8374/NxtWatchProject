@@ -1,4 +1,3 @@
-import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import Login from './index'
 import { BrowserRouter } from 'react-router-dom'
@@ -149,7 +148,7 @@ describe('Dark Mode', () => {
           <Login />
       </BrowserRouter>
     );
-    // The container should have the darkLoginPage class
+
     const container = screen.getByText('USERNAME').closest('.loginContainer');
     expect(container).toHaveClass('darkLoginPage');
   });
@@ -160,7 +159,7 @@ describe('Dark Mode', () => {
           <Login />
       </BrowserRouter>
     );
-    // The logo should be the dark theme logo
+    
     const logo = screen.getByRole('img');
     expect(logo).toHaveAttribute(
       'src',
@@ -174,7 +173,7 @@ describe('Dark Mode', () => {
           <Login />
       </BrowserRouter>
     );
-    // All labels should have the darkLabel class
+    
     const labels = screen.getAllByText(/USERNAME|PASSWORD/);
     labels.forEach(label => {
       expect(label).toHaveClass('darkLabel');

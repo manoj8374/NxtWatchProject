@@ -19,7 +19,9 @@ class HomeStore {
       runInAction(() => {
         this.data = videos;
         this.isLoading = false;
+        console.log(videos, 'videos')
       });
+
     } catch (e) {
       runInAction(() => {
         this.errorView = true;
